@@ -22,16 +22,23 @@ public class App {
 
         SingleEngineROC singleEngineROC = null;
         CriticalFieldLength criticalFieldLength = null;
+        TakeOffSpeed takeOffSpeed = null;
+
         try {
             TakeOffIndexChart toChart = new TakeOffIndexChart();
             singleEngineROC = new SingleEngineROC();
             criticalFieldLength = new CriticalFieldLength();
+            takeOffSpeed = new TakeOffSpeed();
+
             Map<String, Double> toIndex = toChart.calculate(temperature, rwyPressureAlt);
             printMap(toIndex);
             Map<String, Double> ROC = singleEngineROC.calculate(temperature, rwyPressureAlt, grossWeight, toDragIndex);
             printMap(ROC);
             Map<String, Double> cFL = criticalFieldLength.calculate(toIndex.get("MAX"), grossWeight,wind,rcr);
             printMap(cFL);
+            Map<String, Double> takeOffSpeeds = takeOffSpeed.calculate(grossWeight);
+            printMap(takeOffSpeeds);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
