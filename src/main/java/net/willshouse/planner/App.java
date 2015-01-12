@@ -35,6 +35,7 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //this is a test
     }
 
     private static void printMap(Map<String, Double> chartResults) {
