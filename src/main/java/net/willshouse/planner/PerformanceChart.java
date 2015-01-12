@@ -53,6 +53,7 @@ public abstract class PerformanceChart {
         return results;
     }
 
+    //todo need to add min/max val extraction from json
     protected ChartSeries toChartSeries(String seriesName, String xField, String yField) throws IOException {
         return new ChartSeries(jsonToDoubleArray(rootNode.get(seriesName).get(xField)),
                 jsonToDoubleArray((rootNode.get(seriesName).get(yField))));

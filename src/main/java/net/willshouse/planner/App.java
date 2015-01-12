@@ -16,19 +16,21 @@ public class App {
         double temperature = 15;
         double rwyLength = 6000;
         double rwySlope = 0.01;
-        double wind = 10;
+        double wind = -10;
         double rcr = 23;
 
 
         SingleEngineROC singleEngineROC = null;
         CriticalFieldLength criticalFieldLength = null;
         TakeOffSpeed takeOffSpeed = null;
+        TakeOffGroundRun takeOffGroundRun = null;
 
         try {
             TakeOffIndexChart toChart = new TakeOffIndexChart();
             singleEngineROC = new SingleEngineROC();
             criticalFieldLength = new CriticalFieldLength();
             takeOffSpeed = new TakeOffSpeed();
+            takeOffGroundRun = new TakeOffGroundRun();
 
             Map<String, Double> toIndex = toChart.calculate(temperature, rwyPressureAlt);
             printMap(toIndex);
@@ -38,7 +40,8 @@ public class App {
             printMap(cFL);
             Map<String, Double> takeOffSpeeds = takeOffSpeed.calculate(grossWeight);
             printMap(takeOffSpeeds);
-
+            Map<String, Double> takeOffDistance = takeOffGroundRun.calculate(toIndex.get("MAX"), grossWeight, flapSetting, wind);
+            printMap(takeOffDistance);
         } catch (IOException e) {
             e.printStackTrace();
         }

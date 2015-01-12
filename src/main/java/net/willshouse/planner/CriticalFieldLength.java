@@ -21,12 +21,15 @@ public class CriticalFieldLength extends PerformanceChart {
     }
 
     public Map<String, Double> calculate(double takeoffIndex, double grossWeight,double wind,double rcr) {
-        //todo for tailwinds need to take the absolute value of the wind component get the results
-        //then take the delta between x and f(x) and negate it
+        //todo head/tailwinds are not symmetrical as expected need to add new charts for tailwind
         double absWind = Math.abs(wind);
         Map<String, Double> results = new HashMap<String, Double>();
         double interpolatedGrossWeight = interpolateBetweenSeries(grossWeights, takeoffIndex,grossWeight);
-        double interpolatedWinds = interpolateBetweenSeries(winds,wind,interpolatedGrossWeight);
+        double interpolatedWinds = interpolateBetweenSeries(winds, absWind, interpolatedGrossWeight);
+        double deltavalue = Math.abs(interpolatedGrossWeight - interpolatedWinds);
+        if (wind < 0) {
+            interpolatedWinds = interpolatedGrossWeight + deltavalue;
+        }
         double criticalFieldLength = interpolateBetweenSeries(fieldLengths,rcr,interpolatedWinds);
         results.put("Critical Field Length",criticalFieldLength*100);
         return results;
