@@ -42,7 +42,7 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //test3
+        //test4
     }
 
     private static void printMap(Map<String, Double> chartResults) {
