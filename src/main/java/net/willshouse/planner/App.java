@@ -24,6 +24,7 @@ public class App {
         CriticalFieldLength criticalFieldLength = null;
         TakeOffSpeed takeOffSpeed = null;
         TakeOffGroundRun takeOffGroundRun = null;
+        WheelBrakeEnergyLimitSpeed wheelBrakeEnergyLimitSpeed = null;
 
         try {
             TakeOffIndexChart toChart = new TakeOffIndexChart();
@@ -31,6 +32,7 @@ public class App {
             criticalFieldLength = new CriticalFieldLength();
             takeOffSpeed = new TakeOffSpeed();
             takeOffGroundRun = new TakeOffGroundRun();
+            wheelBrakeEnergyLimitSpeed = new WheelBrakeEnergyLimitSpeed();
 
             Map<String, Double> toIndex = toChart.calculate(temperature, rwyPressureAlt);
             printMap(toIndex);
@@ -42,6 +44,8 @@ public class App {
             printMap(takeOffSpeeds);
             Map<String, Double> takeOffDistance = takeOffGroundRun.calculate(toIndex.get("MAX"), grossWeight, flapSetting, wind);
             printMap(takeOffDistance);
+            Map<String, Double> limitSpeed = wheelBrakeEnergyLimitSpeed.calculate(rwyPressureAlt, temperature, grossWeight, true);
+            printMap(limitSpeed);
         } catch (IOException e) {
             e.printStackTrace();
         }

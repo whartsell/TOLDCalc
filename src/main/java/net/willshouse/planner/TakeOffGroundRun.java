@@ -12,7 +12,7 @@ public class TakeOffGroundRun extends PerformanceChart {
     private Map<Double, ChartSeries> flaps7_grossWeights;
     private Map<Double, ChartSeries> headWinds;
 
-    protected TakeOffGroundRun() throws IOException {
+    public TakeOffGroundRun() throws IOException {
         super("takeOffGroundRun.json");
         flaps0_grossWeights = toChartSeriesMap("0GrossWeights");
         flaps7_grossWeights = toChartSeriesMap("7GrossWeights");
