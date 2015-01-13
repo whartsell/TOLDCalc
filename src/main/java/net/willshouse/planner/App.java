@@ -17,39 +17,29 @@ public class App {
         double rwyLength = 6000;
         double rwySlope = 0.01;
         double wind = 10;
-        double rcr = 23;
-
-
-        SingleEngineROC singleEngineROC = null;
-        CriticalFieldLength criticalFieldLength = null;
-        TakeOffSpeed takeOffSpeed = null;
-        TakeOffGroundRun takeOffGroundRun = null;
-        WheelBrakeEnergyLimitSpeed wheelBrakeEnergyLimitSpeed = null;
+        double rcr = 16;
 
         try {
-            TakeOffIndexChart toChart = new TakeOffIndexChart();
-            singleEngineROC = new SingleEngineROC();
-            criticalFieldLength = new CriticalFieldLength();
-            takeOffSpeed = new TakeOffSpeed();
-            takeOffGroundRun = new TakeOffGroundRun();
-            wheelBrakeEnergyLimitSpeed = new WheelBrakeEnergyLimitSpeed();
 
-            Map<String, Double> toIndex = toChart.calculate(temperature, rwyPressureAlt);
+
+            Map<String, Double> toIndex = new TakeOffIndexChart().calculate(temperature, rwyPressureAlt);
             printMap(toIndex);
-            Map<String, Double> ROC = singleEngineROC.calculate(temperature, rwyPressureAlt, grossWeight, toDragIndex);
+            Map<String, Double> ROC = new SingleEngineROC().calculate(temperature, rwyPressureAlt, grossWeight, toDragIndex);
             printMap(ROC);
-            Map<String, Double> cFL = criticalFieldLength.calculate(toIndex.get("MAX"), grossWeight,wind,rcr);
+            Map<String, Double> cFL = new CriticalFieldLength().calculate(toIndex.get("MAX"), grossWeight, wind, rcr);
             printMap(cFL);
-            Map<String, Double> takeOffSpeeds = takeOffSpeed.calculate(grossWeight);
+            Map<String, Double> takeOffSpeeds = new TakeOffSpeed().calculate(grossWeight);
             printMap(takeOffSpeeds);
-            Map<String, Double> takeOffDistance = takeOffGroundRun.calculate(toIndex.get("MAX"), grossWeight, flapSetting, wind);
+            Map<String, Double> takeOffDistance = new TakeOffGroundRun().calculate(toIndex.get("MAX"), grossWeight, flapSetting, wind);
             printMap(takeOffDistance);
-            Map<String, Double> limitSpeed = wheelBrakeEnergyLimitSpeed.calculate(rwyPressureAlt, temperature, wind, grossWeight, true);
+            Map<String, Double> limitSpeed = new WheelBrakeEnergyLimitSpeed().calculate(rwyPressureAlt, temperature, wind, grossWeight, true);
             printMap(limitSpeed);
+            Map<String, Double> refusal = new RefusalSpeed().calculate(rwyPressureAlt, temperature, rwyLength, toIndex.get("MAX"), grossWeight, wind, rcr, false);
+            printMap(refusal);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //test4
+
     }
 
     private static void printMap(Map<String, Double> chartResults) {

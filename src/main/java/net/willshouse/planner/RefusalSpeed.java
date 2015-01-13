@@ -26,7 +26,7 @@ public class RefusalSpeed extends PerformanceChart {
         Map<String, Double> results = new HashMap<String, Double>();
         double step1FofX = interpolateBetweenSeries(step1, takeOffIndex, runwayLength);
         double step2FofX = interpolateBetweenSeries(step2, step1FofX, grossWeight);
-        double refusalSpeed = interpolateBetweenSeries(step3, step2FofX, RCR) + wind;
+        double refusalSpeed = interpolateBetweenSeries(step3, RCR, step2FofX) + 50 + wind;
         if (limitSpeed < refusalSpeed) refusalSpeed = limitSpeed;
         results.put("refusal speed", refusalSpeed);
 
