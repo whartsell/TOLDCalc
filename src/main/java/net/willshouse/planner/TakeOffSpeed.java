@@ -18,11 +18,22 @@ public class TakeOffSpeed extends PerformanceChart {
 
     }
 
-    public Map<String, Double> calculate(double grossWeight) {
-        Map<String, Double> results = new HashMap<String, Double>();
-        results.put("Flaps 0", takeOffSpeeds.get("Flaps 0").interpolateY(grossWeight));
-        results.put("Flaps 7", takeOffSpeeds.get("Flaps 7").interpolateY(grossWeight));
+    public double calculate(double grossWeight, int flapSetting) {
 
-        return results;
+        double takeOffSpeed = 0;
+        switch (flapSetting) {
+
+            case 0:
+                takeOffSpeed = takeOffSpeeds.get("Flaps 0").interpolateY(grossWeight);
+                break;
+            case 7:
+                takeOffSpeed = takeOffSpeeds.get("Flaps 7").interpolateY(grossWeight);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Flaps must be set to 0 or 7");
+        }
+
+        return takeOffSpeed;
     }
 }

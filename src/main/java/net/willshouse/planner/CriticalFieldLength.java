@@ -1,7 +1,6 @@
 package net.willshouse.planner;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,8 +8,8 @@ import java.util.Map;
  */
 public class CriticalFieldLength extends PerformanceChart {
     private Map<Double, ChartSeries> grossWeights;
-    private Map<Double,ChartSeries> winds;
-    private Map<Double,ChartSeries> fieldLengths;
+    private Map<Double, ChartSeries> winds;
+    private Map<Double, ChartSeries> fieldLengths;
 
 
     public CriticalFieldLength() throws IOException {
@@ -20,19 +19,42 @@ public class CriticalFieldLength extends PerformanceChart {
         fieldLengths = toChartSeriesMap("fieldLengths");
     }
 
-    public Map<String, Double> calculate(double takeoffIndex, double grossWeight,double wind,double rcr) {
+    public double calculate(double takeoffIndex, double grossWeight, double wind, double rcr, int flaps,
+                            boolean speedBrakesOpen, boolean useBestSEROC) {
         //todo head/tailwinds are not symmetrical as expected need to add new charts for tailwind
-        double absWind = Math.abs(wind);
-        Map<String, Double> results = new HashMap<String, Double>();
-        double interpolatedGrossWeight = interpolateBetweenSeries(grossWeights, takeoffIndex,grossWeight);
-        double interpolatedWinds = interpolateBetweenSeries(winds, absWind, interpolatedGrossWeight);
-        double deltavalue = Math.abs(interpolatedGrossWeight - interpolatedWinds);
-        if (wind < 0) {
-            interpolatedWinds = interpolatedGrossWeight + deltavalue;
+        double flapsDistanceModifier = 1.0d;
+        double speedBrakesDistanceModifier = 1.7d;
+        double criticalFieldLength;
+
+        switch (flaps) {
+            case 0: {
+                if (useBestSEROC) {
+                    flapsDistanceModifier = 1.22d;
+                } else flapsDistanceModifier = 1.07d;
+            }
+            break;
+
+            case 7: {
+                if (useBestSEROC) {
+                    flapsDistanceModifier = 1.16d;
+                } else flapsDistanceModifier = 1.0d;
+            }
+            break;
+
+            default:
+                throw new IllegalArgumentException("Flaps must be 0 or 7");
         }
-        double criticalFieldLength = interpolateBetweenSeries(fieldLengths,rcr,interpolatedWinds);
-        results.put("Critical Field Length",criticalFieldLength*100);
-        return results;
+        if (speedBrakesOpen) speedBrakesDistanceModifier = 1.0d;
+
+
+        double interpolatedGrossWeight = interpolateBetweenSeries(grossWeights, takeoffIndex, grossWeight);
+        double interpolatedWinds = interpolateBetweenSeries(winds, wind, interpolatedGrossWeight);
+
+
+        criticalFieldLength = interpolateBetweenSeries(fieldLengths, rcr, interpolatedWinds) * 100 *
+                flapsDistanceModifier * speedBrakesDistanceModifier;
+
+        return criticalFieldLength;
     }
 
 }

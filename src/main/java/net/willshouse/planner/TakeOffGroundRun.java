@@ -1,7 +1,6 @@
 package net.willshouse.planner;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,29 +19,31 @@ public class TakeOffGroundRun extends PerformanceChart {
 
     }
 
-    public Map<String, Double> calculate(double takeoffIndex, double grossWeight, double flaps, double wind) {
-        Map<String, Double> results = new HashMap<String, Double>();
+    public double calculate(double takeoffIndex, double grossWeight, int flaps, double wind, boolean useBestSEROC) {
+
         //todo head/tailwinds are not symmetrical as expected need to add new charts for tailwind
         double interpolatedGrossWeight;
-        double absWind = Math.abs(wind);
-        if (flaps == 0) {
-            interpolatedGrossWeight = interpolateBetweenSeries(flaps0_grossWeights, takeoffIndex, grossWeight);
-        } else if (flaps == 7) {
-            interpolatedGrossWeight = interpolateBetweenSeries(flaps7_grossWeights, takeoffIndex, grossWeight);
-        } else throw new IllegalArgumentException("valid flap settings are 0,7");
+        double takeOffGroundRun;
+        double bestSEROCMultiplier = 1.0d;
+        switch (flaps) {
+            case 0:
+                interpolatedGrossWeight = interpolateBetweenSeries(flaps0_grossWeights, takeoffIndex, grossWeight);
+                bestSEROCMultiplier = 1.25;
+                break;
+            case 7:
+                interpolatedGrossWeight = interpolateBetweenSeries(flaps7_grossWeights, takeoffIndex, grossWeight);
+                bestSEROCMultiplier = 1.18;
+                break;
 
-        results.put("debug grossWeight fx", interpolatedGrossWeight);
-
-        double groundRun = interpolateBetweenSeries(headWinds, absWind, interpolatedGrossWeight);
-        double deltaRun = Math.abs(interpolatedGrossWeight - groundRun);
-        if (wind < 0) {
-            groundRun = interpolatedGrossWeight + deltaRun;
+            default:
+                throw new IllegalArgumentException("valid flap settings are 0,7");
 
         }
-        results.put("debug abs", Math.abs(interpolatedGrossWeight - groundRun));
-        results.put("takeOff Ground Run", groundRun * 100);
+
+        takeOffGroundRun = interpolateBetweenSeries(headWinds, wind, interpolatedGrossWeight) * 100;
+        if (useBestSEROC) takeOffGroundRun = takeOffGroundRun * bestSEROCMultiplier;
 
 
-        return results;
+        return takeOffGroundRun;
     }
 }

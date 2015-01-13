@@ -1,7 +1,6 @@
 package net.willshouse.planner;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,19 +17,27 @@ public class RefusalSpeed extends PerformanceChart {
 
     }
 
-    public Map<String, Double> calculate(double pressureAlt, double temperature, double runwayLength, double takeOffIndex, double grossWeight, double wind, double RCR, boolean speedBrakesClosed) throws IOException {
+    public double calculate(double pressureAlt, double temperature, double runwayLength, double takeOffIndex, double grossWeight, double wind, double RCR, boolean speedBrakesOpened) throws IOException {
+        double speedBrakesSpeedModifier = 1.0d;
+
+        if (!speedBrakesOpened) {
+            speedBrakesSpeedModifier = 0.96d;
+            if (RCR < 13) speedBrakesSpeedModifier = 0.87d;
+        }
 
         double limitSpeed = new WheelBrakeEnergyLimitSpeed().calculate(pressureAlt, temperature,
-                wind, grossWeight, speedBrakesClosed).get("WheelBrake Energy Limit Speed");
+                wind, grossWeight, speedBrakesOpened);
 
-        Map<String, Double> results = new HashMap<String, Double>();
         double step1FofX = interpolateBetweenSeries(step1, takeOffIndex, runwayLength);
         double step2FofX = interpolateBetweenSeries(step2, step1FofX, grossWeight);
-        double refusalSpeed = interpolateBetweenSeries(step3, RCR, step2FofX) + 50 + wind;
+        double refusalSpeed = interpolateBetweenSeries(step3, RCR, step2FofX) + 50;
+        refusalSpeed = refusalSpeed * speedBrakesSpeedModifier + wind;
+
+
+
         if (limitSpeed < refusalSpeed) refusalSpeed = limitSpeed;
-        results.put("refusal speed", refusalSpeed);
 
 
-        return results;
+        return refusalSpeed;
     }
 }

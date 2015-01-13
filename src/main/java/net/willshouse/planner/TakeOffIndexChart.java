@@ -20,17 +20,23 @@ public class TakeOffIndexChart extends PerformanceChart {
         pressureAltitudes = toChartSeriesMap("pressureAltitudes");
         takeOffIndices = new HashMap<String, ChartSeries>();
         takeOffIndices.put("MAX", toChartSeries("takeOffIndices", "xMax", "dataMax"));
-        takeOffIndices.put("PTFS", toChartSeries("takeOffIndices", "xPFTS", "dataPFTS"));
+        takeOffIndices.put("3% Below PTFS", toChartSeries("takeOffIndices", "xPFTS", "dataPFTS"));
     }
 
-    public Map<String, Double> calculate(double temperature, double pressureAlt) {
-        Map<String, Double> results = new HashMap<String, Double>();
+    public double calculate(double temperature, double pressureAlt, boolean maxThrust) {
+        double takeOffIndex;
         if (pressureAlt < 0) pressureAlt = 0;
         double interpolatedAltitude = interpolateBetweenSeries(pressureAltitudes, temperature,pressureAlt);
         double takeOffLookupValue = interpolatedAltitude;
-        results.put("MAX", takeOffIndices.get("MAX").interpolateY(takeOffLookupValue));
-        results.put("PTFS", takeOffIndices.get("PTFS").interpolateY(takeOffLookupValue));
-        return results;
+
+        if (maxThrust) {
+            takeOffIndex = takeOffIndices.get("MAX").interpolateY(takeOffLookupValue);
+        } else {
+            takeOffIndex = takeOffIndices.get("3% Below PTFS").interpolateY(takeOffLookupValue);
+        }
+
+
+        return takeOffIndex;
 
     }
 }
