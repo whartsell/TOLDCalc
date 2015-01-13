@@ -16,7 +16,7 @@ public class App {
         double temperature = 15;
         double rwyLength = 6000;
         double rwySlope = 0.01;
-        double wind = -10;
+        double wind = 10;
         double rcr = 23;
 
 
@@ -44,7 +44,7 @@ public class App {
             printMap(takeOffSpeeds);
             Map<String, Double> takeOffDistance = takeOffGroundRun.calculate(toIndex.get("MAX"), grossWeight, flapSetting, wind);
             printMap(takeOffDistance);
-            Map<String, Double> limitSpeed = wheelBrakeEnergyLimitSpeed.calculate(rwyPressureAlt, temperature, grossWeight, true);
+            Map<String, Double> limitSpeed = wheelBrakeEnergyLimitSpeed.calculate(rwyPressureAlt, temperature, wind, grossWeight, true);
             printMap(limitSpeed);
         } catch (IOException e) {
             e.printStackTrace();

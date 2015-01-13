@@ -22,7 +22,7 @@ public class WheelBrakeEnergyLimitSpeed extends PerformanceChart {
         step3.put("Open", toChartSeries("Step3", "x", "dataOpened"));
     }
 
-    public Map<String, Double> calculate(double pressureAlt, double temperature, double grossWeight, boolean speedBrakesOpened) {
+    public Map<String, Double> calculate(double pressureAlt, double temperature, double wind, double grossWeight, boolean speedBrakesOpened) {
         Map<String, Double> results = new HashMap<String, Double>();
         double step1FofX = interpolateBetweenSeries(step1, temperature, pressureAlt);
         double step2FofX = interpolateBetweenSeries(step2, step1FofX, grossWeight);
@@ -33,6 +33,10 @@ public class WheelBrakeEnergyLimitSpeed extends PerformanceChart {
             step3FofX = step3.get("Closed").interpolateY(step2FofX);
 
         }
+
+        if (step3FofX > 190) step3FofX = 190;
+        step3FofX = step3FofX + wind;
+
         results.put("WheelBrake Energy Limit Speed", step3FofX);
         return results;
     }
