@@ -27,7 +27,7 @@ public class ContinuationSpeed extends PerformanceChart {
     }
 
 
-    public double calculate(double grossWeight, double takeoffIndex, double rwyLength, int flapSetting, double wind) {
+    public double calculate(double grossWeight, double takeoffIndex, double rwyLength, int flapSetting, double wind, boolean useBestSEROC) {
         int sigFigs = 2;
         double continuationSpeed;
         double step1FofX = interpolateBetweenSeries(Step1, takeoffIndex, rwyLength);

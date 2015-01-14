@@ -12,7 +12,7 @@ public class ContinuationSpeedTest extends TestCase {
         double wind = 10;
         double slope = .01;
         double continuationSpeed = new ContinuationSpeed().calculate(grossWeight, takeoffIndex, rwyLength, flaps,
-                wind);
+                wind, false);
 
         assertEquals(115d, continuationSpeed);
 
