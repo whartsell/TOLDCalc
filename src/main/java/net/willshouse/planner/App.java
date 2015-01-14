@@ -40,6 +40,8 @@ public class App {
             System.out.printf("Wheel Brake Energy Limit Speed: %.0f%n", limitSpeed);
             double refusal = new RefusalSpeed().calculate(rwyPressureAlt, temperature, rwyLength, toIndex, grossWeight, wind, rcr, speedBrakesOpened);
             System.out.printf("Refusal Speed: %.0f%n", refusal);
+            double continuationSpeed = new ContinuationSpeed().calculate(grossWeight, toIndex, rwyLength, flapSetting, wind);
+            System.out.printf("ContinuationSpeed: %.0f%n", continuationSpeed);
         } catch (IOException e) {
             e.printStackTrace();
         }
