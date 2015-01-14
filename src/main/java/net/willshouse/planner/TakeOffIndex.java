@@ -9,13 +9,13 @@ import java.util.Map;
 /**
  * Created by whartsell on 1/6/15.
  */
-public class TakeOffIndexChart extends PerformanceChart {
+public class TakeOffIndex extends PerformanceChart {
 
     private Map<Double, ChartSeries> pressureAltitudes;
     private Map<String, ChartSeries> takeOffIndices;
 
 
-    public TakeOffIndexChart() throws IOException {
+    public TakeOffIndex() throws IOException {
         super("TakeOffIndex.json");
         pressureAltitudes = toChartSeriesMap("pressureAltitudes");
         takeOffIndices = new HashMap<String, ChartSeries>();
@@ -25,9 +25,9 @@ public class TakeOffIndexChart extends PerformanceChart {
 
     public double calculate(double temperature, double pressureAlt, boolean maxThrust) {
         double takeOffIndex;
+        int sigFigs = 2;
         if (pressureAlt < 0) pressureAlt = 0;
-        double interpolatedAltitude = interpolateBetweenSeries(pressureAltitudes, temperature,pressureAlt);
-        double takeOffLookupValue = interpolatedAltitude;
+        double takeOffLookupValue = interpolateBetweenSeries(pressureAltitudes, temperature, pressureAlt);
 
         if (maxThrust) {
             takeOffIndex = takeOffIndices.get("MAX").interpolateY(takeOffLookupValue);
@@ -35,8 +35,11 @@ public class TakeOffIndexChart extends PerformanceChart {
             takeOffIndex = takeOffIndices.get("3% Below PTFS").interpolateY(takeOffLookupValue);
         }
 
+        if (takeOffIndex >= 10)
+            sigFigs = 3;
 
-        return takeOffIndex;
+
+        return ChartUtils.roundToSignificantFigures(takeOffIndex, sigFigs);
 
     }
 }

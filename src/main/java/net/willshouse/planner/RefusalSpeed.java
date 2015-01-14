@@ -19,6 +19,7 @@ public class RefusalSpeed extends PerformanceChart {
 
     public double calculate(double pressureAlt, double temperature, double runwayLength, double takeOffIndex, double grossWeight, double wind, double RCR, boolean speedBrakesOpened) throws IOException {
         double speedBrakesSpeedModifier = 1.0d;
+        int sigFigs = 2;
 
         if (!speedBrakesOpened) {
             speedBrakesSpeedModifier = 0.96d;
@@ -34,10 +35,10 @@ public class RefusalSpeed extends PerformanceChart {
         refusalSpeed = refusalSpeed * speedBrakesSpeedModifier + wind;
 
 
-
         if (limitSpeed < refusalSpeed) refusalSpeed = limitSpeed;
 
-
-        return refusalSpeed;
+        if (refusalSpeed >= 100)
+            sigFigs = 3;
+        return ChartUtils.roundToSignificantFigures(refusalSpeed, sigFigs);
     }
 }

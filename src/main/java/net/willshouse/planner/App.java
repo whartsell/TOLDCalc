@@ -25,9 +25,9 @@ public class App {
         try {
 
 
-            double toIndex = new TakeOffIndexChart().calculate(temperature, rwyPressureAlt, maxThrust);
+            double toIndex = new TakeOffIndex().calculate(temperature, rwyPressureAlt, maxThrust);
             System.out.printf("Takeoff Index: %.1f%n", toIndex);
-            double ROC = new TakeOffSingleEngineROC().calculate(temperature, rwyPressureAlt, grossWeight, toDragIndex, maxThrust);
+            double ROC = new SingleEngineROC().calculate(temperature, rwyPressureAlt, grossWeight, toDragIndex, maxThrust);
             System.out.printf("TakeOff Speed Single Engine Rate of Climb (gear & flaps down): %.1f%n", ROC);
 
             double cFL = new CriticalFieldLength().calculate(toIndex, grossWeight, wind, rcr, flapSetting, speedBrakesOpened, useBestSingleEngineRateOfClimb);

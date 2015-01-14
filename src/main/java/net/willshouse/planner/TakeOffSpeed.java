@@ -19,7 +19,7 @@ public class TakeOffSpeed extends PerformanceChart {
     }
 
     public double calculate(double grossWeight, int flapSetting) {
-
+        int sigFigs = 2;
         double takeOffSpeed = 0;
         switch (flapSetting) {
 
@@ -33,7 +33,8 @@ public class TakeOffSpeed extends PerformanceChart {
             default:
                 throw new IllegalArgumentException("Flaps must be set to 0 or 7");
         }
-
-        return takeOffSpeed;
+        if (takeOffSpeed >= 100)
+            sigFigs = 3;
+        return ChartUtils.roundToSignificantFigures(takeOffSpeed, sigFigs);
     }
 }

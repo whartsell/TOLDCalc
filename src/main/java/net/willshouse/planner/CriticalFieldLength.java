@@ -25,6 +25,7 @@ public class CriticalFieldLength extends PerformanceChart {
         double flapsDistanceModifier = 1.0d;
         double speedBrakesDistanceModifier = 1.7d;
         double criticalFieldLength;
+        int sigFigs = 2;
 
         switch (flaps) {
             case 0: {
@@ -54,7 +55,10 @@ public class CriticalFieldLength extends PerformanceChart {
         criticalFieldLength = interpolateBetweenSeries(fieldLengths, rcr, interpolatedWinds) * 100 *
                 flapsDistanceModifier * speedBrakesDistanceModifier;
 
-        return criticalFieldLength;
+        if (criticalFieldLength >= 10000)
+            sigFigs = 3;
+
+        return ChartUtils.roundToSignificantFigures(criticalFieldLength, sigFigs);
     }
 
 }

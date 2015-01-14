@@ -5,21 +5,16 @@ package net.willshouse.planner;
  */
 public class ChartUtils {
 
-//    public static ChartSeries interpolateBetweenSeries(Map<Double, ChartSeries> seriesMap, Double x) {
-//        ChartSeries results;
-//        ArrayList<Double> seriesKeys = new ArrayList<Double>();
-//        ArrayList<Double> seriesValues = new ArrayList<Double>();
-//
-//        for (Double key : seriesMap.keySet()) {
-//            seriesKeys.add(key);
-//            seriesValues.add(seriesMap.get(key).interpolateY(x));
-//        }
-//
-//        results = new ChartSeries(
-//                ArrayUtils.toPrimitive(seriesKeys.toArray(new Double[seriesKeys.size()])),
-//                ArrayUtils.toPrimitive(seriesValues.toArray(new Double[seriesValues.size()])));
-//
-//
-//        return results;
-//    }
+    public static double roundToSignificantFigures(double num, int n) {
+        if (num == 0) {
+            return 0;
+        }
+
+        final double d = Math.ceil(Math.log10(num < 0 ? -num : num));
+        final int power = n - (int) d;
+
+        final double magnitude = Math.pow(10, power);
+        final long shifted = Math.round(num * magnitude);
+        return shifted / magnitude;
+    }
 }

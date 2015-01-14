@@ -4,7 +4,17 @@ import junit.framework.TestCase;
 
 public class ContinuationSpeedTest extends TestCase {
 
-    public void testCalculate() throws Exception {
+    public void testSampleProblem() throws Exception {
+        double takeoffIndex = 9.6;
+        double rwyLength = 6000;
+        double grossWeight = 40000;
+        int flaps = 0;
+        double wind = 10;
+        double slope = .01;
+        double continuationSpeed = new ContinuationSpeed().calculate(grossWeight, takeoffIndex, rwyLength, flaps,
+                wind);
+
+        assertEquals(115d, continuationSpeed);
 
     }
 }

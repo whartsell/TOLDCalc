@@ -27,6 +27,8 @@ public class WheelBrakeEnergyLimitSpeed extends PerformanceChart {
         double step1FofX = interpolateBetweenSeries(step1, temperature, pressureAlt);
         double step2FofX = interpolateBetweenSeries(step2, step1FofX, grossWeight);
         double step3FofX;
+        double limitSpeed;
+        int sigFigs = 2;
         if (speedBrakesOpened) {
             step3FofX = step3.get("Open").interpolateY(step2FofX);
         } else {
@@ -34,7 +36,9 @@ public class WheelBrakeEnergyLimitSpeed extends PerformanceChart {
         }
 
         if (step3FofX > 190) step3FofX = 190;
-
-        return step3FofX + wind;
+        limitSpeed = step3FofX + wind;
+        if (limitSpeed >= 100)
+            sigFigs = 3;
+        return ChartUtils.roundToSignificantFigures(limitSpeed, sigFigs);
     }
 }

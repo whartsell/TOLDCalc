@@ -25,6 +25,7 @@ public class TakeOffGroundRun extends PerformanceChart {
         double interpolatedGrossWeight;
         double takeOffGroundRun;
         double bestSEROCMultiplier = 1.0d;
+        int sigFigs = 2;
         switch (flaps) {
             case 0:
                 interpolatedGrossWeight = interpolateBetweenSeries(flaps0_grossWeights, takeoffIndex, grossWeight);
@@ -42,8 +43,9 @@ public class TakeOffGroundRun extends PerformanceChart {
 
         takeOffGroundRun = interpolateBetweenSeries(headWinds, wind, interpolatedGrossWeight) * 100;
         if (useBestSEROC) takeOffGroundRun = takeOffGroundRun * bestSEROCMultiplier;
+        if (takeOffGroundRun >= 10000)
+            sigFigs = 3;
 
-
-        return takeOffGroundRun;
+        return ChartUtils.roundToSignificantFigures(takeOffGroundRun, sigFigs);
     }
 }
