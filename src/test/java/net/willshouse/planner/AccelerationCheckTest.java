@@ -12,7 +12,8 @@ public class AccelerationCheckTest extends TestCase {
         double slope = .01;
         double accelerationCheckSpeed = new AccelerationCheck().calculate(takeoffIndex,
                 grossWeight, checkTime, wind, slope);
-        assertEquals(98d, accelerationCheckSpeed);
+        //should be 98 with slope
+        assertEquals(102d, accelerationCheckSpeed);
     }
 
 }

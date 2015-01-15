@@ -59,6 +59,8 @@ public class App {
             System.out.printf("Acceleration Check at %d seconds: %.0fkias with %dkias tolerance %n", checkTime,
                     checkSpeed, AccelerationCheck.accelerationCheckTolerance(refusal, continuationSpeed));
 
+            double ptfs = new PredictedTakeoffFanSpeed().calculate(temperature);
+            System.out.printf("Predicted Takeoff Fan Speed: %.1f%%%n", ptfs);
         } catch (IOException e) {
             e.printStackTrace();
         }
