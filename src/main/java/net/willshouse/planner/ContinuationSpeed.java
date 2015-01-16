@@ -22,14 +22,13 @@ public class ContinuationSpeed extends PerformanceChart {
         Step4 = toChartSeriesMap("Step4");
 
 
-        //todo add headwind step
-        //todo add tailwind step
     }
 
 
     public double calculate(double grossWeight, double takeoffIndex, double rwyLength, int flapSetting, double wind, boolean useBestSEROC) {
         int sigFigs = 2;
         double continuationSpeed;
+        //todo chart for best single engine rate of climb as takeoff speed
         double step1FofX = interpolateBetweenSeries(Step1, takeoffIndex, rwyLength);
         double step2FofX = interpolateBetweenSeries(Step2, step1FofX, grossWeight);
         double step3FofX;
@@ -48,7 +47,8 @@ public class ContinuationSpeed extends PerformanceChart {
             step3FofX = interpolateBetweenSeries(Step3, flapSetting, step2FofX);
         }
 
-        //do wind here
+        //todo impliment tailwind
+        //todo implement slope charts
         continuationSpeed = interpolateBetweenSeries(Step4, wind, step3FofX);
 
 

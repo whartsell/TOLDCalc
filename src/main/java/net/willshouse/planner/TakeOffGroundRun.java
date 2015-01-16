@@ -21,7 +21,8 @@ public class TakeOffGroundRun extends PerformanceChart {
 
     public double calculate(double takeoffIndex, double grossWeight, int flaps, double wind, boolean useBestSEROC) {
 
-        //todo head/tailwinds are not symmetrical as expected need to add new charts for tailwind
+        //todo impliment tailwind
+        //todo implement slope charts
         double interpolatedGrossWeight;
         double takeOffGroundRun;
         double bestSEROCMultiplier = 1.0d;

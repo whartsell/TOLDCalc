@@ -40,8 +40,11 @@ public class AccelerationCheck extends PerformanceChart {
             if (wind >= 0)
                 fOfWinds = interpolateBetweenSeries(HeadWinds, wind, fOfTime);
             else
+                //todo impliment tailwind
+
                 throw new NotImplementedException();
         }
+        //todo implement slope charts
         double accelerationCheck = fOfWinds + 60;
         if (accelerationCheck >= 100)
             sigFigs = 3;

@@ -21,7 +21,8 @@ public class CriticalFieldLength extends PerformanceChart {
 
     public double calculate(double takeoffIndex, double grossWeight, double wind, double rcr, int flaps,
                             boolean speedBrakesOpen, boolean useBestSEROC) {
-        //todo head/tailwinds are not symmetrical as expected need to add new charts for tailwind
+        //todo impliment tailwind
+        //todo implement slope charts
         double flapsDistanceModifier = 1.0d;
         double speedBrakesDistanceModifier = 1.7d;
         double criticalFieldLength;
