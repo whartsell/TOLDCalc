@@ -39,3 +39,10 @@ Thumbs.db
 ##################
 .idea/
 *.iml
+*.iws
+
+# Maven #
+#########
+log/
+target/
+
