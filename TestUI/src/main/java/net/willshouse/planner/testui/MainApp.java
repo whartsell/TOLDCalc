@@ -3,8 +3,11 @@ package net.willshouse.planner.testui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import net.willshouse.planner.testui.controller.AircraftOverviewController;
+import net.willshouse.planner.testui.model.Aircraft;
 
 import java.io.IOException;
 
@@ -14,8 +17,10 @@ import java.io.IOException;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private Aircraft aircraft;
 
     public MainApp() {
+        aircraft = new Aircraft("A-10C");
 
     }
 
@@ -29,13 +34,29 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("TOLD Calc");
 
         initRootLayout();
+        showAircraftOverview();
 
+    }
+
+    private void showAircraftOverview() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/AircraftOverview.fxml"));
+            AnchorPane aircraftOverview = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(aircraftOverview);
+
+            AircraftOverviewController controller = loader.getController();
+            controller.setAircraft(aircraft);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/testui/view/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             Scene scene = new Scene(rootLayout);
@@ -45,5 +66,9 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Aircraft getAircraft() {
+        return aircraft;
     }
 }

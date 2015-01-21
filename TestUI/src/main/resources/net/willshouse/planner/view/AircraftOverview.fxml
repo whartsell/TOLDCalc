@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="205.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8">
+            minWidth="-Infinity" prefHeight="205.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="net.willshouse.planner.testui.controller.AircraftOverviewController">
     <children>
         <TitledPane animated="false" collapsible="false" prefHeight="205.0" prefWidth="640.0" text="Aircraft Summary"
                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -57,12 +58,16 @@
                                 <Insets right="5.0"/>
                             </padding>
                         </Label>
-                        <TextField GridPane.columnIndex="1"/>
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <TextField fx:id="grossWeightField" GridPane.columnIndex="1"/>
+                        <TextField fx:id="dragIndexField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <ChoiceBox fx:id="speedBrakesChoiceBox" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="2"/>
+                        <ChoiceBox fx:id="flapsChoiceBox" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="3"/>
+                        <ChoiceBox fx:id="thrustChoiceBox" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="4"/>
+                        <ChoiceBox fx:id="antiSkidChoiceBox" prefWidth="150.0" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="5"/>
                     </children>
                 </GridPane>
             </content>
