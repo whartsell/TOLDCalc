@@ -1,4 +1,4 @@
-package net.willshouse.planner.view;
+package net.willshouse.planner.testui.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
