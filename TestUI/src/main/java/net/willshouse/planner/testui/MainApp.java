@@ -38,6 +38,21 @@ public class MainApp extends Application {
 
     }
 
+    private void initRootLayout() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/RootLayout.fxml"));
+            rootLayout = (BorderPane) loader.load();
+
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void showAircraftOverview() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -53,20 +68,6 @@ public class MainApp extends Application {
         }
     }
 
-    private void initRootLayout() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public Aircraft getAircraft() {
         return aircraft;

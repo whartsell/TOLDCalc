@@ -5,6 +5,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import net.willshouse.planner.testui.MainApp;
 import net.willshouse.planner.testui.model.Aircraft;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 /**
  * Created by whartsell on 1/20/15.
@@ -30,6 +32,7 @@ public class AircraftOverviewController {
 
     private MainApp mainApp;
     private Aircraft aircraft;
+    private ValidationSupport validationSupport = new ValidationSupport();
 
     public AircraftOverviewController() {
 
@@ -65,6 +68,8 @@ public class AircraftOverviewController {
 
     @FXML
     private void initialize() {
+        validationSupport.registerValidator(grossWeightField, Validator.createEmptyValidator("Gross Weight is Required"));
+        ValidationSupport.setRequired(grossWeightField, true);
         speedBrakesChoiceBox.getItems().add("Open");
         speedBrakesChoiceBox.getItems().add("Closed");
         flapsChoiceBox.getItems().add(0);

@@ -3,9 +3,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="205.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="net.willshouse.planner.testui.controller.AircraftOverviewController">
+<fx:root xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+         minWidth="-Infinity" prefHeight="205.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8"
+         fx:controller="net.willshouse.planner.testui.controller.AircraftOverviewController">
     <children>
         <TitledPane fx:id="titledPane" animated="false" collapsible="false" prefHeight="205.0" prefWidth="640.0"
                     text="Aircraft Summary" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
@@ -75,4 +75,4 @@
             </content>
         </TitledPane>
     </children>
-</AnchorPane>
+</fx:root>
