@@ -7,9 +7,9 @@
             minWidth="-Infinity" prefHeight="205.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8"
             fx:controller="net.willshouse.planner.testui.controller.AircraftOverviewController">
     <children>
-        <TitledPane animated="false" collapsible="false" prefHeight="205.0" prefWidth="640.0" text="Aircraft Summary"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0">
+        <TitledPane fx:id="titledPane" animated="false" collapsible="false" prefHeight="205.0" prefWidth="640.0"
+                    text="Aircraft Summary" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
                 <GridPane>
                     <columnConstraints>
@@ -68,6 +68,8 @@
                                    GridPane.rowIndex="4"/>
                         <ChoiceBox fx:id="antiSkidChoiceBox" prefWidth="150.0" GridPane.columnIndex="1"
                                    GridPane.rowIndex="5"/>
+                        <Button mnemonicParsing="false" onAction="#handleSet" text="Set" GridPane.columnIndex="2"
+                                GridPane.rowIndex="5"/>
                     </children>
                 </GridPane>
             </content>

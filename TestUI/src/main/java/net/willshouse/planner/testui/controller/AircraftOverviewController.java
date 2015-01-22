@@ -41,6 +41,17 @@ public class AircraftOverviewController {
 
     }
 
+    @FXML
+    private void handleSet() {
+        aircraft.setGrossWeight(Integer.valueOf(grossWeightField.getText()));
+        System.out.println("gross Weight: " + aircraft.getGrossWeight());
+        aircraft.setDragIndex(Double.valueOf(dragIndexField.getText()));
+        System.out.println("Drag Index: " + aircraft.getDragIndex());
+        aircraft.setFlapSetting(flapsChoiceBox.getValue());
+        System.out.println("Flaps: " + aircraft.getFlapSetting());
+
+    }
+
     public void setAircraft(Aircraft aircraft) {
         this.aircraft = aircraft;
         grossWeightField.setText(Integer.toString(aircraft.getGrossWeight()));

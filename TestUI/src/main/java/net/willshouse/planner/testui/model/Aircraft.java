@@ -9,11 +9,25 @@ public class Aircraft {
     private final StringProperty name;
     private final IntegerProperty grossWeight;
     private final DoubleProperty dragIndex;
+    private final IntegerProperty flapSetting;
 
     public Aircraft(String name) {
         this.dragIndex = new SimpleDoubleProperty(0d);
         this.grossWeight = new SimpleIntegerProperty(0);
         this.name = new SimpleStringProperty(name);
+        this.flapSetting = new SimpleIntegerProperty(7);
+    }
+
+    public int getFlapSetting() {
+        return flapSetting.get();
+    }
+
+    public void setFlapSetting(int flapSetting) {
+        this.flapSetting.set(flapSetting);
+    }
+
+    public IntegerProperty flapSettingProperty() {
+        return flapSetting;
     }
 
     public String getName() {
