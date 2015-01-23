@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+         minWidth="-Infinity" prefHeight="205.0" prefWidth="640.0" type="javafx.scene.layout.AnchorPane"
+         xmlns="http://javafx.com/javafx/8">
+    <children>
+        <TitledPane fx:id="titledPane" animated="false" collapsible="false" prefHeight="205.0" prefWidth="640.0"
+                    text="Weather Summary" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0"
+                                           percentWidth="15.0" prefWidth="126.69999999999999"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.0" minWidth="10.0" percentWidth="33.0"
+                                           prefWidth="169.94"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.0" minWidth="10.0" prefWidth="299.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label text="Temperature">
+                            <padding>
+                                <Insets right="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label text="Headwind" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets right="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label text="Crosswind" GridPane.rowIndex="2">
+                            <padding>
+                                <Insets right="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label text="Pressure Altitude" GridPane.rowIndex="3">
+                            <padding>
+                                <Insets right="5.0"/>
+                            </padding>
+                        </Label>
+                        <TextField fx:id="temperatureField" GridPane.columnIndex="1"/>
+                        <TextField fx:id="headWindField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField fx:id="crossWindField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="pressureAltitudeField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    </children>
+                </GridPane>
+            </content>
+        </TitledPane>
+    </children>
+</fx:root>
