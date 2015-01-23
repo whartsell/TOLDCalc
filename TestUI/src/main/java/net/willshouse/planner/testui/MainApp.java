@@ -3,11 +3,10 @@ package net.willshouse.planner.testui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.willshouse.planner.testui.controller.AircraftOverviewController;
-import net.willshouse.planner.testui.model.Aircraft;
+import net.willshouse.planner.ui.components.AircraftOverviewControl;
+import net.willshouse.planner.ui.components.model.Aircraft;
 
 import java.io.IOException;
 
@@ -54,18 +53,14 @@ public class MainApp extends Application {
     }
 
     private void showAircraftOverview() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/AircraftOverview.fxml"));
-            AnchorPane aircraftOverview = (AnchorPane) loader.load();
+        //            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/AircraftOverview.fxml"));
+//            AnchorPane aircraftOverview = (AnchorPane) loader.load();
+        AircraftOverviewControl aircraftOverview = new AircraftOverviewControl();
+        rootLayout.setCenter(aircraftOverview);
 
-            rootLayout.setCenter(aircraftOverview);
-
-            AircraftOverviewController controller = loader.getController();
-            controller.setAircraft(aircraft);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//            AircraftOverviewControl controller = loader.getController();
+        aircraftOverview.setAircraft(aircraft);
     }
 
 

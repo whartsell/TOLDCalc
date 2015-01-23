@@ -1,4 +1,4 @@
-package net.willshouse.planner.testui.model;
+package net.willshouse.planner.ui.components.model;
 
 import javafx.beans.property.*;
 

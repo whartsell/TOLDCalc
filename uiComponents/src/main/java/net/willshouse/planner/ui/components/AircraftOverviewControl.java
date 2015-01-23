@@ -1,17 +1,20 @@
-package net.willshouse.planner.testui.controller;
+package net.willshouse.planner.ui.components;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import net.willshouse.planner.testui.MainApp;
-import net.willshouse.planner.testui.model.Aircraft;
+import javafx.scene.layout.AnchorPane;
+import net.willshouse.planner.ui.components.model.Aircraft;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+
+import java.io.IOException;
 
 /**
  * Created by whartsell on 1/20/15.
  */
-public class AircraftOverviewController {
+public class AircraftOverviewControl extends AnchorPane {
     @FXML
     private TextField grossWeightField;
 
@@ -30,19 +33,25 @@ public class AircraftOverviewController {
     @FXML
     private ChoiceBox<String> antiSkidChoiceBox;
 
-    private MainApp mainApp;
+
     private Aircraft aircraft;
     private ValidationSupport validationSupport = new ValidationSupport();
 
-    public AircraftOverviewController() {
+    public AircraftOverviewControl() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AircraftOverview.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        fxmlLoader.setClassLoader(getClass().getClassLoader());
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
 
-
-    }
 
     @FXML
     private void handleSet() {
@@ -59,7 +68,6 @@ public class AircraftOverviewController {
         this.aircraft = aircraft;
         grossWeightField.setText(Integer.toString(aircraft.getGrossWeight()));
         dragIndexField.setText(Double.toString(aircraft.getDragIndex()));
-
         speedBrakesChoiceBox.setValue("Open");
         flapsChoiceBox.setValue(7);
         thrustChoiceBox.setValue("Max");
@@ -81,7 +89,5 @@ public class AircraftOverviewController {
 
     }
 
-    private void showAircraftDetails(Aircraft aircraft) {
 
-    }
 }
