@@ -1,6 +1,7 @@
 package net.willshouse.planner;
 
 import junit.framework.TestCase;
+import net.willshouse.planner.charts.ChartSeries;
 
 public class ChartSeriesTest extends TestCase {
     double[] temperatures = {-30, -20, -10, 0, 10, 20, 30, 40, 50};

@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import net.willshouse.planner.ui.components.model.Aircraft;
+import net.willshouse.planner.models.Aircraft;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
@@ -77,6 +77,7 @@ public class AircraftOverviewControl extends AnchorPane {
     @FXML
     private void initialize() {
         validationSupport.registerValidator(grossWeightField, Validator.createEmptyValidator("Gross Weight is Required"));
+
         ValidationSupport.setRequired(grossWeightField, true);
         speedBrakesChoiceBox.getItems().add("Open");
         speedBrakesChoiceBox.getItems().add("Closed");

@@ -1,4 +1,4 @@
-package net.willshouse.planner.ui.components.model;
+package net.willshouse.planner.models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

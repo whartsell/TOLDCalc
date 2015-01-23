@@ -3,7 +3,8 @@ package net.willshouse.planner.ui.components;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import net.willshouse.planner.ui.components.model.Aircraft;
+import net.willshouse.planner.models.Aircraft;
+
 
 /**
  * Created by whartsell on 1/22/2015.

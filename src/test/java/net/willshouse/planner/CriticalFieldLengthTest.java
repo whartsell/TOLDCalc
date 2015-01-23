@@ -1,6 +1,7 @@
 package net.willshouse.planner;
 
 import junit.framework.TestCase;
+import net.willshouse.planner.charts.CriticalFieldLength;
 
 public class CriticalFieldLengthTest extends TestCase {
     //sample problem given in T.O 1a-10a-1-1 A2-8

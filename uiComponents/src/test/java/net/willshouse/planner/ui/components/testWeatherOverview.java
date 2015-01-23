@@ -3,7 +3,8 @@ package net.willshouse.planner.ui.components;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import net.willshouse.planner.ui.components.model.Weather;
+import net.willshouse.planner.models.Weather;
+
 
 /**
  * Created by whartsell on 1/23/15.

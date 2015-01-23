@@ -1,6 +1,7 @@
 package net.willshouse.planner;
 
 import junit.framework.TestCase;
+import net.willshouse.planner.charts.TakeOffGroundRun;
 
 public class TakeOffGroundRunTest extends TestCase {
 

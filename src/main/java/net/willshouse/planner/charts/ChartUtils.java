@@ -1,4 +1,4 @@
-package net.willshouse.planner;
+package net.willshouse.planner.charts;
 
 /**
  * Created by whartsell on 1/7/15.

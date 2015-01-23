@@ -1,4 +1,4 @@
-package net.willshouse.planner;
+package net.willshouse.planner.charts;
 
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;

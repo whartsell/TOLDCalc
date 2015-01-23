@@ -1,4 +1,4 @@
-package net.willshouse.planner;
+package net.willshouse.planner.charts;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ public abstract class PerformanceChart {
         rootNode = mapper.readTree(this.getClass().getClassLoader().getResource(resourceName));
     }
 
-    public static double interpolateBetweenSeries(Map<Double, ChartSeries> seriesMap, double x,double interpolatedSeries
+    public static double interpolateBetweenSeries(Map<Double, ChartSeries> seriesMap, double x, double interpolatedSeries
     ) {
         ChartSeries interpolatedChartSeries;
         ArrayList<Double> seriesKeys = new ArrayList<Double>();

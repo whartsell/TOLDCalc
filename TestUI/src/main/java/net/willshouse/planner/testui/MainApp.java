@@ -5,10 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import net.willshouse.planner.models.Aircraft;
+import net.willshouse.planner.models.Runway;
 import net.willshouse.planner.ui.components.AircraftOverviewControl;
 import net.willshouse.planner.ui.components.RunwayOverviewControl;
-import net.willshouse.planner.ui.components.model.Aircraft;
-import net.willshouse.planner.ui.components.model.Runway;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package net.willshouse.planner.ui.components.model;
+package net.willshouse.planner.models;
 
 import javafx.beans.property.*;
 
@@ -11,11 +11,15 @@ public class Aircraft {
     private final DoubleProperty dragIndex;
     private final IntegerProperty flapSetting;
 
+
+    private final BooleanProperty maxThrust;
+
     public Aircraft(String name) {
         this.dragIndex = new SimpleDoubleProperty(0d);
         this.grossWeight = new SimpleIntegerProperty(0);
         this.name = new SimpleStringProperty(name);
         this.flapSetting = new SimpleIntegerProperty(7);
+        maxThrust = new SimpleBooleanProperty();
     }
 
     public int getFlapSetting() {
@@ -66,5 +70,19 @@ public class Aircraft {
         return dragIndex;
     }
 
+    public boolean getMaxThrust() {
+        return maxThrust.get();
+    }
 
+    public void setMaxThrust(boolean maxThrust) {
+        this.maxThrust.set(maxThrust);
+    }
+
+    public BooleanProperty maxThrustProperty() {
+        return maxThrust;
+    }
+
+    public boolean isValid() {
+        return false;
+    }
 }

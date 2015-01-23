@@ -1,6 +1,7 @@
 package net.willshouse.planner;
 
 import junit.framework.TestCase;
+import net.willshouse.planner.charts.TakeOffSpeed;
 
 public class TakeOffSpeedTest extends TestCase {
     //sample problem given T.O 1a-10a-1-1 A2.4

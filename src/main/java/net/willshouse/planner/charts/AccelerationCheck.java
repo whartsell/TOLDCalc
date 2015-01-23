@@ -1,4 +1,4 @@
-package net.willshouse.planner;
+package net.willshouse.planner.charts;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

@@ -1,6 +1,8 @@
 package net.willshouse.planner;
 
 
+import net.willshouse.planner.charts.*;
+
 import java.io.IOException;
 
 /**

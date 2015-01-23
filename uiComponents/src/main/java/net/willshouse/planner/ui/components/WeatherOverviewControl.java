@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import net.willshouse.planner.ui.components.model.Weather;
+import net.willshouse.planner.models.Weather;
 
 import java.io.IOException;
 

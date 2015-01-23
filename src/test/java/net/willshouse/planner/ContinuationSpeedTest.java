@@ -1,6 +1,7 @@
 package net.willshouse.planner;
 
 import junit.framework.TestCase;
+import net.willshouse.planner.charts.ContinuationSpeed;
 
 public class ContinuationSpeedTest extends TestCase {
 

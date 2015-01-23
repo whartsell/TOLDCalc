@@ -1,6 +1,7 @@
 package net.willshouse.planner;
 
 import junit.framework.TestCase;
+import net.willshouse.planner.charts.RefusalSpeed;
 
 public class RefusalSpeedTest extends TestCase {
     // A2-9
