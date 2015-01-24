@@ -97,6 +97,6 @@ public class Aircraft extends Model {
     }
 
     public boolean isValid() {
-        return false;
+        return true;
     }
 }

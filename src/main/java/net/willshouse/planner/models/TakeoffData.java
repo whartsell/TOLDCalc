@@ -28,6 +28,10 @@ public class TakeoffData {
         this.weather = weather;
     }
 
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
+    }
+
     public void calculateSingleEngineROC() throws IOException {
         if (aircraft.isValid() && weather.isValid()) {
             singleEngineROC.setValue(new SingleEngineROC().calculate(weather.getTemperature()
@@ -38,5 +42,19 @@ public class TakeoffData {
 
     }
 
+    public double getPTFSField() {
+        return PTFSField.get();
+    }
 
+    public DoubleProperty PTFSFieldProperty() {
+        return PTFSField;
+    }
+
+    public int getSingleEngineROC() {
+        return singleEngineROC.get();
+    }
+
+    public IntegerProperty singleEngineROCProperty() {
+        return singleEngineROC;
+    }
 }

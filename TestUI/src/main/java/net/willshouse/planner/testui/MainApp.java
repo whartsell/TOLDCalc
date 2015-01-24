@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.willshouse.planner.models.Aircraft;
 import net.willshouse.planner.models.Runway;
+import net.willshouse.planner.models.TakeoffData;
 import net.willshouse.planner.models.Weather;
 import net.willshouse.planner.ui.components.AircraftOverviewControl;
 import net.willshouse.planner.ui.components.RunwayOverviewControl;
@@ -30,6 +31,7 @@ public class MainApp extends Application {
     private AircraftOverviewControl aircraftOverview;
     private WeatherOverviewControl weatherOverviewControl;
     private RunwayOverviewControl runwayOverviewControl;
+    private TakeoffData takeoffData;
 
     public MainApp() {
         aircraft = new Aircraft("A-10C");
@@ -71,6 +73,7 @@ public class MainApp extends Application {
             aircraftOverview = new AircraftOverviewControl();
             weatherOverviewControl = new WeatherOverviewControl();
             runwayOverviewControl = new RunwayOverviewControl();
+            takeoffData = new TakeoffData();
 
 
             Scene scene = new Scene(rootLayout);
@@ -82,15 +85,38 @@ public class MainApp extends Application {
         }
     }
 
+    //todo this is a test and should be removed
     private void showAircraftOverview() {
         vBox.getChildren().addAll(aircraftOverview, runwayOverviewControl, weatherOverviewControl);
         aircraftOverview.setAircraft(aircraft);
         weatherOverviewControl.setWeather(weather);
         runwayOverviewControl.setRunway(runway);
+        takeoffData.setAircraft(aircraft);
+        takeoffData.setWeather(weather);
+        aircraft.setGrossWeight(40000);
+        aircraft.setDragIndex(-.65);
+        aircraft.setMaxThrust(true);
+        weather.setPressureAltitude(1000);
+        weather.setTemperature(15);
     }
 
 
     public Aircraft getAircraft() {
         return aircraft;
     }
+
+
+    @FXML
+    private void handleTest() {
+
+        try {
+            takeoffData.calculateSingleEngineROC();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(takeoffData.getSingleEngineROC());
+    }
 }
+
+
+
