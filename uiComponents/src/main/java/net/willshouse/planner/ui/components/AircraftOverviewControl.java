@@ -77,6 +77,8 @@ public class AircraftOverviewControl extends AnchorPane {
     @FXML
     private void initialize() {
         validationSupport.registerValidator(grossWeightField, Validator.createEmptyValidator("Gross Weight is Required"));
+        validationSupport.registerValidator(grossWeightField, Validator.createPredicateValidator(Aircraft.validGrossWeight, "im a dummy"));
+        validationSupport.registerValidator(dragIndexField, Validator.createPredicateValidator(Aircraft.validDragIndex, "drag index"));
 
         ValidationSupport.setRequired(grossWeightField, true);
         speedBrakesChoiceBox.getItems().add("Open");

@@ -2,16 +2,18 @@ package net.willshouse.planner.models;
 
 import javafx.beans.property.*;
 
+import java.util.function.Predicate;
+
 /**
  * Created by whartsell on 1/20/15.
  */
 public class Aircraft {
+    public static Predicate<Object> validGrossWeight = Aircraft::validateGrossWeight;
+    public static Predicate<Object> validDragIndex = Aircraft::validateDragIndex;
     private final StringProperty name;
     private final IntegerProperty grossWeight;
     private final DoubleProperty dragIndex;
     private final IntegerProperty flapSetting;
-
-
     private final BooleanProperty maxThrust;
 
     public Aircraft(String name) {
@@ -21,6 +23,17 @@ public class Aircraft {
         this.flapSetting = new SimpleIntegerProperty(7);
         maxThrust = new SimpleBooleanProperty();
     }
+
+    public static boolean validateGrossWeight(Object value) {
+        return Validators.isBetween(value, 30000, 50000);
+
+    }
+
+    public static boolean validateDragIndex(Object dI) {
+        return Validators.isBetween(dI, -4, 7);
+    }
+
+
 
     public int getFlapSetting() {
         return flapSetting.get();
@@ -51,6 +64,7 @@ public class Aircraft {
     }
 
     public void setGrossWeight(int grossWeight) {
+
         this.grossWeight.set(grossWeight);
     }
 
