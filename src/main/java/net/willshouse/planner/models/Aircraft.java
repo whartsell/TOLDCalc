@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 /**
  * Created by whartsell on 1/20/15.
  */
-public class Aircraft {
+public class Aircraft extends Model {
     public static Predicate<Object> validGrossWeight = Aircraft::validateGrossWeight;
     public static Predicate<Object> validDragIndex = Aircraft::validateDragIndex;
     private final StringProperty name;
@@ -25,12 +25,12 @@ public class Aircraft {
     }
 
     public static boolean validateGrossWeight(Object value) {
-        return Validators.isBetween(value, 30000, 50000);
+        return isBetween(value, 30000, 50000);
 
     }
 
     public static boolean validateDragIndex(Object dI) {
-        return Validators.isBetween(dI, -4, 7);
+        return isBetween(dI, -4d, 7d);
     }
 
 

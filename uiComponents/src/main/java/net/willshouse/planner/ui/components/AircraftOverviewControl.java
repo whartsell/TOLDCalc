@@ -45,6 +45,7 @@ public class AircraftOverviewControl extends AnchorPane {
         try {
             fxmlLoader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
@@ -72,15 +73,12 @@ public class AircraftOverviewControl extends AnchorPane {
         flapsChoiceBox.setValue(7);
         thrustChoiceBox.setValue("Max");
         antiSkidChoiceBox.setValue("On");
+
     }
 
     @FXML
     private void initialize() {
-        validationSupport.registerValidator(grossWeightField, Validator.createEmptyValidator("Gross Weight is Required"));
-        validationSupport.registerValidator(grossWeightField, Validator.createPredicateValidator(Aircraft.validGrossWeight, "im a dummy"));
-        validationSupport.registerValidator(dragIndexField, Validator.createPredicateValidator(Aircraft.validDragIndex, "drag index"));
 
-        ValidationSupport.setRequired(grossWeightField, true);
         speedBrakesChoiceBox.getItems().add("Open");
         speedBrakesChoiceBox.getItems().add("Closed");
         flapsChoiceBox.getItems().add(0);
@@ -89,6 +87,8 @@ public class AircraftOverviewControl extends AnchorPane {
         thrustChoiceBox.getItems().add("3% below PTFS");
         antiSkidChoiceBox.getItems().add("Off");
         antiSkidChoiceBox.getItems().add("On");
+        validationSupport.registerValidator(grossWeightField, Validator.createPredicateValidator(Aircraft.validGrossWeight, "im a dummy"));
+        validationSupport.registerValidator(dragIndexField, Validator.createPredicateValidator(Aircraft.validDragIndex, "drag index"));
 
     }
 

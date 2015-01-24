@@ -23,10 +23,11 @@ public class testAircraftOverview extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("TOLD Calc");
         rootLayout = new AircraftOverviewControl();
-        rootLayout.setAircraft(aircraft);
+
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
+        rootLayout.setAircraft(aircraft);
 
     }
 }

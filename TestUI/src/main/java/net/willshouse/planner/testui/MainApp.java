@@ -1,14 +1,18 @@
 package net.willshouse.planner.testui;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.willshouse.planner.models.Aircraft;
 import net.willshouse.planner.models.Runway;
+import net.willshouse.planner.models.Weather;
 import net.willshouse.planner.ui.components.AircraftOverviewControl;
 import net.willshouse.planner.ui.components.RunwayOverviewControl;
+import net.willshouse.planner.ui.components.WeatherOverviewControl;
 
 import java.io.IOException;
 
@@ -18,13 +22,18 @@ import java.io.IOException;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    @FXML
+    private VBox vBox;
     private Aircraft aircraft;
+    private Weather weather;
     private Runway runway;
     private AircraftOverviewControl aircraftOverview;
+    private WeatherOverviewControl weatherOverviewControl;
     private RunwayOverviewControl runwayOverviewControl;
 
     public MainApp() {
         aircraft = new Aircraft("A-10C");
+        weather = new Weather();
         runway = new Runway();
 
     }
@@ -39,8 +48,10 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("TOLD Calc");
 
         initRootLayout();
+        showAircraftOverview();
 
-//        aircraftOverview = new AircraftOverviewControl();
+
+//
 //        rootLayout.setCenter(aircraftOverview);
 //        aircraftOverview.setAircraft(aircraft);
 //        runwayOverviewControl = new RunwayOverviewControl();
@@ -55,7 +66,12 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/RootLayout.fxml"));
+            loader.setController(this);
             rootLayout = (BorderPane) loader.load();
+            aircraftOverview = new AircraftOverviewControl();
+            weatherOverviewControl = new WeatherOverviewControl();
+            runwayOverviewControl = new RunwayOverviewControl();
+
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
@@ -67,13 +83,10 @@ public class MainApp extends Application {
     }
 
     private void showAircraftOverview() {
-        //            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(MainApp.class.getResource("/net/willshouse/planner/view/AircraftOverview.fxml"));
-//            AnchorPane aircraftOverview = (AnchorPane) loader.load();
-
-
-//            AircraftOverviewControl controller = loader.getController();
-
+        vBox.getChildren().addAll(aircraftOverview, runwayOverviewControl, weatherOverviewControl);
+        aircraftOverview.setAircraft(aircraft);
+        weatherOverviewControl.setWeather(weather);
+        runwayOverviewControl.setRunway(runway);
     }
 
 
