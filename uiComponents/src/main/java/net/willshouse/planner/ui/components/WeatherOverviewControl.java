@@ -48,4 +48,23 @@ public class WeatherOverviewControl extends AnchorPane {
         pressureAltitudeField.setText(Integer.toString(weather.getCrossWind()));
     }
 
+    @FXML
+    private void initialize() {
+        temperatureField.textProperty().addListener(
+                (obs, oldval, newval) -> weather.setTemperature(Integer.parseInt(newval))
+        );
+
+        headWindField.textProperty().addListener(
+                (obs, oldval, newval) -> weather.setHeadWind(Integer.parseInt(newval))
+        );
+
+        crossWindField.textProperty().addListener(
+                (obs, oldval, newval) -> weather.setCrossWind(Integer.parseInt(newval))
+        );
+
+        pressureAltitudeField.textProperty().addListener(
+                (obs, oldval, newval) -> weather.setPressureAltitude(Integer.parseInt(newval))
+        );
+    }
+
 }

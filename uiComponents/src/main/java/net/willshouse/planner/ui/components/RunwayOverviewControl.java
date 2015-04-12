@@ -50,6 +50,21 @@ public class RunwayOverviewControl extends AnchorPane {
 
     @FXML
     private void initialize() {
+        headingField.textProperty().addListener(
+                (obs, oldval, newval) -> runway.setHeading(Integer.parseInt(newval))
+        );
+
+        lengthField.textProperty().addListener(
+                (obs, oldval, newval) -> runway.setLength(Integer.parseInt(newval))
+        );
+
+        elevationField.textProperty().addListener(
+                (obs, oldval, newval) -> runway.setElevation(Integer.parseInt(newval))
+        );
+
+        rcrField.textProperty().addListener(
+                (obs, oldval, newval) -> runway.setRcr(Integer.parseInt(newval))
+        );
 
     }
 

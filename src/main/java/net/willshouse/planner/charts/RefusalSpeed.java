@@ -30,6 +30,7 @@ public class RefusalSpeed extends PerformanceChart {
                 wind, grossWeight, speedBrakesOpened);
 
         double step1FofX = interpolateBetweenSeries(step1, takeOffIndex, runwayLength);
+        System.out.println("Step1:" + step1FofX);
         double step2FofX = interpolateBetweenSeries(step2, step1FofX, grossWeight);
         double refusalSpeed = interpolateBetweenSeries(step3, RCR, step2FofX) + 50;
         refusalSpeed = refusalSpeed * speedBrakesSpeedModifier + wind;

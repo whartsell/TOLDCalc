@@ -54,6 +54,9 @@ public class ContinuationSpeed extends PerformanceChart {
 
         //convert it from units to kts
         continuationSpeed = continuationSpeed + 70;
+        if (continuationSpeed < 70) {
+            continuationSpeed = 70;
+        }
         if (continuationSpeed >= 100)
             sigFigs = 3;
 

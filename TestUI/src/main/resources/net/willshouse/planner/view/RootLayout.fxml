@@ -28,6 +28,11 @@
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
+                <Tab text="Loadout">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </Tab>
                 <Tab text="Takeoff">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -44,21 +49,12 @@
                                                       AnchorPane.topAnchor="0.0"/>
                                             </children>
                                         </AnchorPane>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                            <children>
-                                                <Button layoutX="126.0" layoutY="77.0" mnemonicParsing="false"
-                                                        onAction="#handleTest" text="Test"/>
-                                            </children>
-                                        </AnchorPane>
+                                        <AnchorPane fx:id="tdPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0"
+                                                    prefWidth="100.0"/>
                                     </items>
                                 </SplitPane>
                             </children>
                         </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Untitled Tab 2">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
                     </content>
                 </Tab>
             </tabs>

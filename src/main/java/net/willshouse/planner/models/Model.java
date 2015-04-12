@@ -23,7 +23,8 @@ public abstract class Model {
             } else return false;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("I ate it");
+            //e.printStackTrace();
             return false;
         }
     }
@@ -47,7 +48,8 @@ public abstract class Model {
             } else return false;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("I ate it here");
+            //e.printStackTrace();
             return false;
         }
     }

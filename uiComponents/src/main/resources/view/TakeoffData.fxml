@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+         minWidth="-Infinity" prefHeight="656.0" prefWidth="635.0" type="javafx.scene.layout.AnchorPane"
+         xmlns="http://javafx.com/javafx/8">
+    <children>
+        <Button fx:id="calculateButton" layoutX="533.0" layoutY="598.0" mnemonicParsing="false"
+                onAction="#handleCalculate" text="Calculate"/>
+        <GridPane layoutX="125.0" layoutY="117.0" prefHeight="560.0" prefWidth="625.0" AnchorPane.leftAnchor="5.0"
+                  AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints maxHeight="291.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER"/>
+            </rowConstraints>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <children>
+                <Label text="Single Engine Rate of Climb"/>
+                <Label fx:id="seroc" GridPane.columnIndex="1"/>
+                <Label text="Critical Field Length" GridPane.rowIndex="1"/>
+                <Label fx:id="criticalFieldLength" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Fan Speed" GridPane.rowIndex="3"/>
+                <Label fx:id="fanSpeed" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Acceleration Check" GridPane.rowIndex="4"/>
+                <Label fx:id="accelerationCheckSpeed" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label text="Continuation Speed" GridPane.rowIndex="5"/>
+                <Label text="Refusal Speed" GridPane.rowIndex="6"/>
+                <Label fx:id="continuationSpeed" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Label fx:id="refusalSpeed" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                <Label text="Rotation Speed" GridPane.rowIndex="7"/>
+                <Label text="Takeoff Speed" GridPane.rowIndex="8"/>
+                <Label fx:id="rotationSpeed" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <Label fx:id="takeoffSpeed" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+            </children>
+        </GridPane>
+    </children>
+</fx:root>

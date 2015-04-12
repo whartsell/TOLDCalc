@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import net.willshouse.planner.models.Aircraft;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
 
 import java.io.IOException;
 
@@ -15,27 +16,21 @@ import java.io.IOException;
  * Created by whartsell on 1/20/15.
  */
 public class AircraftOverviewControl extends AnchorPane {
+    public ValidationSupport validationSupport = new ValidationSupport();
     @FXML
     private TextField grossWeightField;
-
     @FXML
     private TextField dragIndexField;
-
     @FXML
     private ChoiceBox<String> speedBrakesChoiceBox;
-
     @FXML
     private ChoiceBox<Integer> flapsChoiceBox;
-
     @FXML
     private ChoiceBox<String> thrustChoiceBox;
-
     @FXML
     private ChoiceBox<String> antiSkidChoiceBox;
-
-
     private Aircraft aircraft;
-    private ValidationSupport validationSupport = new ValidationSupport();
+
 
     public AircraftOverviewControl() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AircraftOverview.fxml"));
@@ -51,7 +46,6 @@ public class AircraftOverviewControl extends AnchorPane {
 
 
     }
-
 
 
     @FXML
@@ -79,16 +73,44 @@ public class AircraftOverviewControl extends AnchorPane {
     @FXML
     private void initialize() {
 
-        speedBrakesChoiceBox.getItems().add("Open");
-        speedBrakesChoiceBox.getItems().add("Closed");
-        flapsChoiceBox.getItems().add(0);
-        flapsChoiceBox.getItems().add(7);
-        thrustChoiceBox.getItems().add("Max");
-        thrustChoiceBox.getItems().add("3% below PTFS");
-        antiSkidChoiceBox.getItems().add("Off");
-        antiSkidChoiceBox.getItems().add("On");
+        grossWeightField.textProperty().addListener(
+                (obs, oldval, newval) -> aircraft.setGrossWeight(Integer.parseInt(newval))
+        );
+
+        dragIndexField.textProperty().addListener(
+                (obs, oldval, newval) -> aircraft.setDragIndex(Double.parseDouble(newval))
+        );
+
+        speedBrakesChoiceBox.valueProperty().addListener(
+                (obs, oldval, newval) -> {
+                    if (newval == "Open") aircraft.setSpeedBrakes(true);
+                    else aircraft.setSpeedBrakes(false);
+                }
+        );
+
+        flapsChoiceBox.valueProperty().addListener(
+                (obs, oldval, newval) -> aircraft.setFlapSetting(newval)
+        );
+
+        thrustChoiceBox.valueProperty().addListener(
+                (obs, oldval, newval) -> {
+                    if (newval == "Max") aircraft.setMaxThrust(true);
+                    else aircraft.setMaxThrust(false);
+                }
+        );
+
+
+        speedBrakesChoiceBox.getItems().addAll("Open", "Closed");
+        flapsChoiceBox.getItems().addAll(0, 7);
+        thrustChoiceBox.getItems().addAll("Max", "3% below PTFS");
+        antiSkidChoiceBox.getItems().addAll("Off", "On");
+
         validationSupport.registerValidator(grossWeightField, Validator.createPredicateValidator(Aircraft.validGrossWeight, "im a dummy"));
         validationSupport.registerValidator(dragIndexField, Validator.createPredicateValidator(Aircraft.validDragIndex, "drag index"));
+        validationSupport.invalidProperty().addListener(
+                (obs, oldval, newval) -> System.out.println("is invalid:" + newval)
+        );
+        validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
 
     }
 

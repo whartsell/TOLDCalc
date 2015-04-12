@@ -1,6 +1,9 @@
 package net.willshouse.planner.models;
 
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.function.Predicate;
 
@@ -11,21 +14,32 @@ public class Aircraft extends Model {
     public static Predicate<Object> validGrossWeight = Aircraft::validateGrossWeight;
     public static Predicate<Object> validDragIndex = Aircraft::validateDragIndex;
     private final StringProperty name;
-    private final IntegerProperty grossWeight;
-    private final DoubleProperty dragIndex;
-    private final IntegerProperty flapSetting;
-    private final BooleanProperty maxThrust;
+    private final BooleanProperty isValid;
+    private int grossWeight;
+    private double dragIndex;
+    private int flapSetting;
+    private boolean maxThrust;
+    private boolean speedBrakes;
+
 
     public Aircraft(String name) {
-        this.dragIndex = new SimpleDoubleProperty(0d);
-        this.grossWeight = new SimpleIntegerProperty(0);
+//        this.dragIndex = new SimpleDoubleProperty();
+//        this.grossWeight = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty(name);
-        this.flapSetting = new SimpleIntegerProperty(7);
-        maxThrust = new SimpleBooleanProperty();
+        isValid = new SimpleBooleanProperty(false);
+//        this.flapSetting = new SimpleIntegerProperty(7);
+//        maxThrust = new SimpleBooleanProperty();
+        validateAircraft();
     }
 
     public static boolean validateGrossWeight(Object value) {
         return isBetween(value, 30000, 50000);
+
+    }
+
+    public static boolean validateFlapSetting(int value) {
+        if (value == 7 || value == 0) return true;
+        else return false;
 
     }
 
@@ -34,18 +48,16 @@ public class Aircraft extends Model {
     }
 
 
-
     public int getFlapSetting() {
-        return flapSetting.get();
+        return flapSetting;
     }
 
     public void setFlapSetting(int flapSetting) {
-        this.flapSetting.set(flapSetting);
+        if (validateFlapSetting(flapSetting))
+            this.flapSetting = flapSetting;
+        validateAircraft();
     }
 
-    public IntegerProperty flapSettingProperty() {
-        return flapSetting;
-    }
 
     public String getName() {
         return name.get();
@@ -60,43 +72,57 @@ public class Aircraft extends Model {
     }
 
     public int getGrossWeight() {
-        return grossWeight.get();
+        return grossWeight;
     }
 
     public void setGrossWeight(int grossWeight) {
 
-        this.grossWeight.set(grossWeight);
+        if (validateGrossWeight(grossWeight)) this.grossWeight = grossWeight;
+        validateAircraft();
     }
 
-    public IntegerProperty grossWeightProperty() {
-        return grossWeight;
-    }
+//    public IntegerProperty grossWeightProperty() {
+//        return grossWeight;
+//    }
 
     public double getDragIndex() {
-        return dragIndex.get();
-    }
-
-    public void setDragIndex(double dragIndex) {
-        this.dragIndex.set(dragIndex);
-    }
-
-    public DoubleProperty dragIndexProperty() {
         return dragIndex;
     }
 
+    public void setDragIndex(double dragIndex) {
+        if (validateDragIndex(dragIndex))
+            this.dragIndex = dragIndex;
+        validateAircraft();
+    }
+
+
     public boolean getMaxThrust() {
-        return maxThrust.get();
-    }
-
-    public void setMaxThrust(boolean maxThrust) {
-        this.maxThrust.set(maxThrust);
-    }
-
-    public BooleanProperty maxThrustProperty() {
         return maxThrust;
     }
 
-    public boolean isValid() {
-        return true;
+    public void setMaxThrust(boolean maxThrust) {
+        this.maxThrust = maxThrust;
+    }
+
+    public boolean getSpeedBrakes() {
+        return speedBrakes;
+    }
+
+    public void setSpeedBrakes(boolean speedBrakes) {
+        this.speedBrakes = speedBrakes;
+    }
+
+    public boolean getIsValid() {
+        return isValid.get();
+    }
+
+    public BooleanProperty isValidProperty() {
+        return isValid;
+    }
+
+
+    //will always be true as we dont accept values unless they are valid except during initialization
+    private void validateAircraft() {
+        isValid.set(validateDragIndex(getDragIndex()) && validateGrossWeight(getGrossWeight()));
     }
 }
